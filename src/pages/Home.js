@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import axios from "axios";
+import './Home.css'
+import PokemonTile from "../components/PokemonTile";
 
 
 function Home(props) {
@@ -28,33 +30,33 @@ function Home(props) {
         toggleIsLoading(false)
     }
 
-    function constructPokemonTiles() {
-       allPokemon.results.forEach((pokemon) => {
-           console.log(pokemon.name)
-           })
+    function handleNext() {
+       setPokemonOffset(pokemonOffset + 20)
     }
 
 
     // on page mount fills the state with the info from the first request
     useEffect(() => {
         void fetchAllPokemon()
-    }, [])
+    }, [pokemonOffset])
 
 
-    useEffect(() => {
-        if(isMounted.current) {
-            constructPokemonTiles()
-        }
-
-        isMounted.current = true
-
-    }, [allPokemon])
 
     return (
-        <div>
-            <button onClick={fetchAllPokemon}>Reee</button>
+        <>
+            <button onClick={handleNext}>Next</button>
             <h1>Welcome on the Home page</h1>
-        </div>
+            {/*maps over all pokemon feeding the endpoint for their details to the component*/}
+            <section className="pokemon-tile-container">
+                { allPokemon.results && allPokemon.results.map((pokemon) =>
+                    <PokemonTile
+                        key={pokemon.name}
+                        REQUESTENDPOINT={pokemon.url}
+                    />
+                )
+                }
+            </section>
+        </>
     );
 }
 
