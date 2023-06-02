@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import './PokemonTile.css'
 
 
 function PokemonTile({ REQUESTENDPOINT }) {
@@ -29,12 +30,13 @@ function PokemonTile({ REQUESTENDPOINT }) {
             <>
                 { pokemonInfo.species &&
                 <article className="pokemon-tile">
-                    <h3>{pokemonInfo.species.name}</h3>
-                    <img src={pokemonInfo.sprites.front_default} alt="Pokemon Sprite"/>
-                    <p>{pokemonInfo.moves.length}</p>
-                    <p>{pokemonInfo.weight}</p>
-                    <div>
-                        {pokemonInfo.abilities.map(abilityInfo => <p>{abilityInfo.ability.name}</p>)}
+                    <h2 className="pokemon-name">{pokemonInfo.species.name}</h2>
+                    <img className="pokemon-sprite" src={pokemonInfo.sprites.front_default} alt="Pokemon Sprite"/>
+                    <p className="pokemon-moves"><strong>Moves: </strong>{pokemonInfo.moves.length}</p>
+                    <p className="pokemon-weight"><strong>Weight: </strong> {pokemonInfo.weight}</p>
+                    <div className="ability-container">
+                        <p><strong>Abilities: </strong></p>
+                        {pokemonInfo.abilities.map(abilityInfo => <p className="pokemon-ability">{abilityInfo.ability.name}</p>)}
                     </div>
 
                 </article> }
