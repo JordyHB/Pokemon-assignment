@@ -31,7 +31,11 @@ function PokemonTile({ REQUESTENDPOINT }) {
                 { pokemonInfo.species &&
                 <article className="pokemon-tile">
                     <h2 className="pokemon-name">{pokemonInfo.species.name}</h2>
-                    <img className="pokemon-sprite" src={pokemonInfo.sprites.front_default} alt="Pokemon Sprite"/>
+                    <img
+                        className="pokemon-sprite"
+                        src={ pokemonInfo.sprites.front_default || "https://archives.bulbagarden.net/media/upload/b/b7/Missingno.png"}
+                        alt="Pokemon Sprite"
+                    />
                     <p className="pokemon-moves"><strong>Moves: </strong>{pokemonInfo.moves.length}</p>
                     <p className="pokemon-weight"><strong>Weight: </strong> {pokemonInfo.weight}</p>
                     <div className="ability-container">
