@@ -3,14 +3,14 @@ import axios from "axios";
 import './PokemonTile.css'
 
 
-function PokemonTile({ REQUESTENDPOINT }) {
+function PokemonTile({ requestEndpoint }) {
 
 
 
     const [ pokemonInfo, setPokemonInfo] = useState({})
     async function fetchPokeInfo() {
         try {
-            setPokemonInfo((await axios.get(REQUESTENDPOINT)).data)
+            setPokemonInfo((await axios.get(requestEndpoint)).data)
         } catch (e) {
             console.error(e)
         }
@@ -18,13 +18,10 @@ function PokemonTile({ REQUESTENDPOINT }) {
     }
 
         useEffect(() => {
-            console.log('mounting')
             void fetchPokeInfo()
         }, [])
 
-        useEffect(() => {
-            console.log(pokemonInfo)
-        }, [pokemonInfo] )
+
 
         return (
             <>
@@ -40,7 +37,16 @@ function PokemonTile({ REQUESTENDPOINT }) {
                     <p className="pokemon-weight"><strong>Weight: </strong> {pokemonInfo.weight}</p>
                     <div className="ability-container">
                         <p><strong>Abilities: </strong></p>
-                        {pokemonInfo.abilities.map(abilityInfo => <p className="pokemon-ability">{abilityInfo.ability.name}</p>)}
+                        {/*maps through the abilities array and displays the name of each ability*/}
+                        {pokemonInfo.abilities.map((abilityInfo, index) => {
+                            return <p
+                                // using index because names and urls are duplicate
+                                key={index}
+                                className="pokemon-ability"
+                            >
+                                {abilityInfo.ability.name}
+                            </p>
+                        })}
                     </div>
 
                 </article> }

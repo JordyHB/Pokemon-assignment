@@ -5,6 +5,7 @@ function LimitSelector({ limit, setLimit }) {
           <select
                 value={limit}
                 onChange={(e) => setLimit(Number(e.target.value))}
+                className="limit-selector"
             >
                 <option value={20}>20</option>
                 <option value={40}>40</option>
